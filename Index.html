@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Open Graph / Social Preview Builder</title>
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- html2canvas for exporting the preview to PNG -->
+    <script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+
+  <body>
+    <header class="header">
+      <h1>Open Graph / Social Preview Builder</h1>
+      <p>Build a 1200×630 OG image, preview it, and export a PNG plus meta tags.</p>
+    </header>
+
+    <main class="layout">
+      <section class="panel">
+        <h2>Content</h2>
+
+        <label class="field">
+          <span>Title</span>
+          <input id="title" type="text" maxlength="90" value="Your Page Title" />
+        </label>
+
+        <label class="field">
+          <span>Description</span>
+          <textarea id="description" maxlength="200">A short description that will appear on social previews.</textarea>
+        </label>
+
+        <div class="row">
+          <label class="field">
+            <span>Site name</span>
+            <input id="siteName" type="text" maxlength="40" value="Example.com" />
+          </label>
+
+          <label class="field">
+            <span>URL (display)</span>
+            <input id="displayUrl" type="text" maxlength="60" value="example.com/page" />
+          </label>
+        </div>
+
+        <h2>Design</h2>
+
+        <div class="row">
+          <label class="field">
+            <span>Background color</span>
+            <input id="bgColor" type="color" value="#0B1220" />
+          </label>
+
+          <label class="field">
+            <span>Accent color</span>
+            <input id="accentColor" type="color" value="#60A5FA" />
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Background image URL (optional)</span>
+          <input id="bgImageUrl" type="url" placeholder="https://..." />
+          <small>Tip: Use a publicly accessible image. Some hosts block export due to CORS.</small>
+        </label>
+
+        <label class="field">
+          <span>Logo image URL (optional)</span>
+          <input id="logoUrl" type="url" placeholder="https://..." />
+        </label>
+
+        <h2>Export</h2>
+
+        <div class="actions">
+          <button id="downloadPng" class="primary">Download PNG (1200×630)</button>
+          <button id="copyMeta">Copy meta tags</button>
+          <button id="reset">Reset</button>
+        </div>
+
+        <label class="field">
+          <span>Meta tags</span>
+          <textarea id="metaOutput" readonly></textarea>
+        </label>
+
+        <p class="hint">
+          Notes: OG images are typically <strong>1200×630</strong>. X cards often render best with the same.
+        </p>
+      </section>
+
+      <section class="previewWrap">
+        <div class="previewHeader">
+          <h2>Live Preview (OG image canvas)</h2>
+          <div class="badge">1200×630</div>
+        </div>
+
+        <div class="previewOuter">
+          <!-- This node is exported to PNG -->
+          <div id="ogCanvas" class="ogCanvas" role="img" aria-label="Open Graph preview image">
+            <div class="ogBg" id="ogBg"></div>
+
+            <div class="ogContent">
+              <div class="ogTop">
+                <div class="logo" id="logo" aria-hidden="true"></div>
+                <div class="siteName" id="siteNamePreview">Example.com</div>
+              </div>
+
+              <div class="ogMain">
+                <div class="accentBar" id="accentBar"></div>
+                <div class="textBlock">
+                  <div class="title" id="titlePreview">Your Page Title</div>
+                  <div class="description" id="descriptionPreview">
+                    A short description that will appear on social previews.
+                  </div>
+                </div>
+              </div>
+
+              <div class="ogFooter">
+                <div class="displayUrl" id="displayUrlPreview">example.com/page</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="previewNotes">
+          <h3>Practical checks</h3>
+          <ul>
+            <li>Keep title under ~70 characters for consistent rendering.</li>
+            <li>Use high-contrast text and avoid tiny logos.</li>
+            <li>If PNG export fails with images, try removing background/logo URLs (CORS can block capture).</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Host this on GitHub Pages. No server required.</p>
+    </footer>
+  </body>
+</html>
