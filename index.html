@@ -1,138 +1,232 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Open Graph - Social Preview Builder</title>
-    <link rel="stylesheet" href="styles.css" />
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f4efe7">
+<title>Social Card Studio | Derrick Ottenbreit</title>
+<meta name="description" content="A playful Open Graph and social preview builder by Derrick Ottenbreit.">
+<link rel="stylesheet" href="css/styles.css" media="all" />
 
-    <!-- html2canvas for exporting the preview to PNG -->
-    <script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <script defer src="app.js"></script>
-  </head>
+</head>
+<body>
+<div class="bg-orb one"></div>
+<div class="bg-orb two"></div>
+<div class="bg-grid"></div>
 
-  <body>
-    <header class="header">
-      <h1>Open Graph / Social Preview Builder</h1>
-      <p>Build a 1200×630 OG image, preview it, and export a PNG plus meta tags.</p>
-    </header>
+<main class="shell">
+  <header class="topbar reveal">
+    <div class="brand">
+      <div class="brand-badge">D.O.</div>
+      <div>Derrick Ottenbreit<small>Social Card Studio</small></div>
+    </div>
+    <div class="top-pill">1200 × 630 · browser-side export</div>
+  </header>
 
-    <main class="layout">
-      <section class="panel">
-        <h2>Content</h2>
+  <section class="hero">
+    <div>
+      <h1><span class="hero-line">Make your</span><br><span class="hero-line chipword">link look good.</span></h1>
+    </div>
+    <div class="hero-copy reveal">
+      <p>Build Open Graph images that feel intentional. Tune the layout, colour, image, logo and typography, then export the card and copy the matching meta tags.</p>
+      <div class="stickers">
+        <span class="sticker">OG Images</span>
+        <span class="sticker">GSAP</span>
+        <span class="sticker">Meta-ready</span>
+      </div>
+    </div>
+  </section>
 
-        <label class="field">
-          <span>Title</span>
-          <input id="title" type="text" maxlength="90" value="Your Page Title" />
-        </label>
+  <section class="workspace">
+    <article class="card panel-in">
+      <div class="card-head"><strong>Card controls</strong><span>Design desk</span></div>
+      <div class="controls">
 
-        <label class="field">
-          <span>Description</span>
+        <div class="section-label">Content</div>
+
+        <div class="field">
+          <label for="title"><span>Title</span><span class="meta" id="titleCount">0 / 90</span></label>
+          <input id="title" type="text" maxlength="90" value="Your Page Title">
+        </div>
+
+        <div class="field">
+          <label for="description"><span>Description</span><span class="meta" id="descCount">0 / 200</span></label>
           <textarea id="description" maxlength="200">A short description that will appear on social previews.</textarea>
-        </label>
-
-        <div class="row">
-          <label class="field">
-            <span>Site name</span>
-            <input id="siteName" type="text" maxlength="40" value="Example.com" />
-          </label>
-
-          <label class="field">
-            <span>URL (display)</span>
-            <input id="displayUrl" type="text" maxlength="60" value="example.com/page" />
-          </label>
         </div>
 
-        <h2>Design</h2>
-
-        <div class="row">
-          <label class="field">
-            <span>Background color</span>
-            <input id="bgColor" type="color" value="#0B1220" />
-          </label>
-
-          <label class="field">
-            <span>Accent color</span>
-            <input id="accentColor" type="color" value="#60A5FA" />
-          </label>
+        <div class="grid2">
+          <div class="field">
+            <label for="siteName"><span>Site name</span><span class="meta">Brand</span></label>
+            <input id="siteName" type="text" maxlength="40" value="Example.com">
+          </div>
+          <div class="field">
+            <label for="displayUrl"><span>Display URL</span><span class="meta">Footer</span></label>
+            <input id="displayUrl" type="text" maxlength="60" value="example.com/page">
+          </div>
         </div>
 
-        <label class="field">
-          <span>Background image URL (optional)</span>
-          <input id="bgImageUrl" type="url" placeholder="https://..." />
-          <small>Tip: Use a publicly accessible image. Some hosts block export due to CORS.</small>
-        </label>
+        <div class="field">
+          <label for="kicker"><span>Eyebrow / kicker</span><span class="meta">Optional</span></label>
+          <input id="kicker" type="text" maxlength="40" value="Featured">
+        </div>
 
-        <label class="field">
-          <span>Logo image URL (optional)</span>
-          <input id="logoUrl" type="url" placeholder="https://..." />
-        </label>
+        <div class="section-label">Look</div>
 
-        <h2>Export</h2>
+        <div class="preset-row">
+          <button class="preset" data-preset="midnight">Midnight</button>
+          <button class="preset" data-preset="sunset">Sunset</button>
+          <button class="preset" data-preset="lime">Lime Pop</button>
+          <button class="preset" data-preset="paper">Paper</button>
+        </div>
+
+        <div class="grid3" style="margin-top:14px">
+          <div class="field">
+            <label for="layout"><span>Layout</span><span class="meta">Type</span></label>
+            <select id="layout">
+              <option value="left" selected>Left aligned</option>
+              <option value="center">Centered</option>
+              <option value="split">Split</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="pattern"><span>Pattern</span><span class="meta">BG</span></label>
+            <select id="pattern">
+              <option value="none">None</option>
+              <option value="dots" selected>Dots</option>
+              <option value="grid">Grid</option>
+              <option value="stripes">Stripes</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="overlay"><span>Overlay</span><span class="meta">Image</span></label>
+            <select id="overlay">
+              <option value="0.25">Light</option>
+              <option value="0.45" selected>Medium</option>
+              <option value="0.65">Strong</option>
+              <option value="0">None</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="field">
+            <label><span>Background</span><span class="meta">Base</span></label>
+            <div class="color-pair"><input id="bgColor" type="color" value="#101528"><input id="bgHex" type="text" value="#101528" maxlength="7"></div>
+          </div>
+          <div class="field">
+            <label><span>Accent</span><span class="meta">Highlight</span></label>
+            <div class="color-pair"><input id="accentColor" type="color" value="#6d8cff"><input id="accentHex" type="text" value="#6d8cff" maxlength="7"></div>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="field">
+            <label><span>Text colour</span><span class="meta">Primary</span></label>
+            <div class="color-pair"><input id="textColor" type="color" value="#ffffff"><input id="textHex" type="text" value="#ffffff" maxlength="7"></div>
+          </div>
+          <div class="field">
+            <label><span>Secondary text</span><span class="meta">Muted</span></label>
+            <div class="color-pair"><input id="mutedColor" type="color" value="#d9def2"><input id="mutedHex" type="text" value="#d9def2" maxlength="7"></div>
+          </div>
+        </div>
+
+        <div class="section-label">Images</div>
+
+        <div class="field">
+          <label><span>Background image</span><span class="meta">Optional</span></label>
+          <div class="upload"><input id="bgFile" type="file" accept="image/png,image/jpeg,image/webp"></div>
+          <div class="help">Uploaded locally in your browser. Large, high-resolution images work best.</div>
+        </div>
+
+        <div class="field">
+          <label for="bgImageUrl"><span>Or background image URL</span><span class="meta">Remote</span></label>
+          <input id="bgImageUrl" type="url" placeholder="https://...">
+        </div>
+
+        <div class="field">
+          <label><span>Logo</span><span class="meta">Optional</span></label>
+          <div class="upload"><input id="logoFile" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml"></div>
+        </div>
+
+        <div class="field">
+          <label for="logoUrl"><span>Or logo URL</span><span class="meta">Remote</span></label>
+          <input id="logoUrl" type="url" placeholder="https://...">
+        </div>
+
+        <div class="section-label">Meta</div>
+
+        <div class="grid2">
+          <div class="field">
+            <label for="pageUrl"><span>Canonical page URL</span><span class="meta">og:url</span></label>
+            <input id="pageUrl" type="url" value="https://example.com/page">
+          </div>
+          <div class="field">
+            <label for="imageUrl"><span>Hosted image URL</span><span class="meta">og:image</span></label>
+            <input id="imageUrl" type="url" value="https://example.com/og-image.png">
+          </div>
+        </div>
+
+        <div class="section-label">Export</div>
 
         <div class="actions">
-          <button id="downloadPng" class="primary">Download PNG (1200×630)</button>
-          <button id="copyMeta">Copy meta tags</button>
-          <button id="reset">Reset</button>
+          <button class="btn primary wobble" id="downloadPng">Download PNG</button>
+          <button class="btn secondary wobble" id="copyMeta">Copy meta tags</button>
         </div>
+        <button class="btn full" id="reset">Reset studio</button>
 
-        <label class="field">
-          <span>Meta tags</span>
+        <div class="meta-box">
+          <label for="metaOutput"><span>Generated meta tags</span><span class="meta">Open Graph + X</span></label>
           <textarea id="metaOutput" readonly></textarea>
-        </label>
-
-        <p class="hint">
-          Notes: OG images are typically <strong>1200×630</strong>. X cards often render best with the same.
-        </p>
-      </section>
-
-      <section class="previewWrap">
-        <div class="previewHeader">
-          <h2>Live Preview (OG image canvas)</h2>
-          <div class="badge">1200×630</div>
         </div>
 
-        <div class="previewOuter">
-          <!-- This node is exported to PNG -->
-          <div id="ogCanvas" class="ogCanvas" role="img" aria-label="Open Graph preview image">
-            <div class="ogBg" id="ogBg"></div>
+        <div class="note">Tip: titles around 40–70 characters and short descriptions tend to survive social-platform cropping better. Always test the final image and metadata in the platforms you care about.</div>
+      </div>
+    </article>
 
-            <div class="ogContent">
-              <div class="ogTop">
-                <div class="logo" id="logo" aria-hidden="true"></div>
-                <div class="siteName" id="siteNamePreview">Example.com</div>
-              </div>
-
-              <div class="ogMain">
-                <div class="accentBar" id="accentBar"></div>
-                <div class="textBlock">
-                  <div class="title" id="titlePreview">Your Page Title</div>
-                  <div class="description" id="descriptionPreview">
-                    A short description that will appear on social previews.
-                  </div>
+    <aside class="card preview-card panel-in">
+      <div class="card-head"><strong>Live social preview</strong><span>1200 × 630</span></div>
+      <div class="preview-stage">
+        <div class="frame">
+          <div class="preview-scale" id="previewScale">
+            <div id="ogCanvas" role="img" aria-label="Open Graph social preview image">
+              <div class="og-bg" id="ogBg"></div>
+              <div class="og-pattern" id="ogPattern"></div>
+              <div class="og-content" id="ogContent">
+                <div class="og-top">
+                  <div class="og-logo" id="logo"></div>
+                  <div class="og-site" id="siteNamePreview">Example.com</div>
                 </div>
-              </div>
-
-              <div class="ogFooter">
-                <div class="displayUrl" id="displayUrlPreview">example.com/page</div>
+                <div class="og-main" id="ogMain">
+                  <div class="og-kicker" id="kickerPreview">Featured</div>
+                  <div class="og-title" id="titlePreview">Your Page Title</div>
+                  <div class="og-desc" id="descriptionPreview">A short description that will appear on social previews.</div>
+                </div>
+                <div class="og-footer">
+                  <div id="displayUrlPreview">example.com/page</div>
+                  <div class="og-mark">Social Card Studio</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <div class="preview-status">
+        <span id="statusText">Live preview ready.</span>
+        <code id="statusMeta">1200×630 PNG</code>
+      </div>
+    </aside>
+  </section>
 
-        <div class="previewNotes">
-          <h3>Practical checks</h3>
-          <ul>
-            <li>Keep title under ~70 characters for consistent rendering.</li>
-            <li>Use high-contrast text and avoid tiny logos.</li>
-            <li>If PNG export fails with images, try removing background/logo URLs (CORS can block capture).</li>
-          </ul>
-        </div>
-      </section>
-    </main>
+  <footer class="footer reveal">
+    <span>Derrick Ottenbreit / Social Card Studio</span>
+    <span>Design it. Preview it. Ship it.</span>
+  </footer>
+</main>
 
-    <footer class="footer">
-      <p>Host this on GitHub Pages. No server required.</p>
-    </footer>
-  </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script src="js/main.js"></script>
+
+</body>
 </html>
